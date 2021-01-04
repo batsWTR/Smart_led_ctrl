@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="style.css" >
+		<title>RGB Controler</title>
+	</head>
+	<body>
+		<h1>Smart controler 1</h1>
+		<p>Allumage/Extinction de la led: <a href="/ledOn"><input type = "button" value="ON"> </a><a href="/ledOff"><input type="button" value="OFF"></a></p>
+		<form action="/LED" method="POST">
+			<p>Choix de la couleur: <input type="color" name ="couleur" value="#FF0000" /></p>
+			<p>Choix de l'intensité: <input type="range" min="0" max="255" name="intensite" value="128" list="tickmarks" /></p>
+			<datalist id ="tickmarks">
+				<option value="0" label="0">
+				<option value="255" label="255">
+			</datalist>
+			<p>
+				<label for="effet">Effet:</label> <br />
+				<select name="effet">
+					<option value="Aucun">Aucun</option>
+					<option value="Effet_1">Effet 1</option>
+				</select>
+			</p>
+
+			<input type="submit" value= "Envoyer" />
+		</form
+	</body>
+	<footer>
+		<p>Bas de page<br />
+		</p>
+	</footer>
+</html>
+

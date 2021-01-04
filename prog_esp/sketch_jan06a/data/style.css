@@ -1,0 +1,32 @@
+*
+{
+	font-family:impact,verdana,Arial;
+}
+
+body
+{
+	background-color:rgb(4,164,215);
+	color: white;
+
+}
+footer
+{
+	background-color: rgb(244,213,4);
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+
+	
+}
+h1
+{
+	font-size:xx-large;
+	text-align: center;
+	background-image: url("/led_strip.png");
+	height: 200px;
+}
+p,form
+{
+	text-align: center;
+}
