@@ -1,18 +1,42 @@
 *
 {
 	font-family:impact,verdana,Arial;
+	margin: 0;
+	padding: 0;
+
 }
 
 body
 {
 	background-color:rgb(0,0,250);
 	color: white;
+	box-sizing: border-box;
 }
 
-h1
-{
-	font-size:xx-large;
-	text-align: center;
+.header{
 	background-image: url("led_strip.png");
-	height: 200px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 5rem 0;
+}
+
+.header h1{
+	text-align: center;
+	background-color: black;
+	font-size: 3rem;
+}
+
+.main{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	border: 2px solid red;
+	height: 300px;
+}
+
+.item{
+	height: 3rem;
+	border: 1px solid green;
+	font-size: 1.5rem;
 }
