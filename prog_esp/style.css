@@ -1,42 +1,63 @@
 *
 {
 	font-family:impact,verdana,Arial;
-	margin: 0;
-	padding: 0;
+
 
 }
 
 body
 {
-	background-color:rgb(0,0,250);
+	margin: 0;
+	padding: 0;
+	max-width: 800px;
+	background-color:rgb(72, 158, 192);
 	color: white;
 	box-sizing: border-box;
+	font-size: 62.5%;
 }
 
 .header{
 	background-image: url("led_strip.png");
 	background-repeat: no-repeat;
 	background-size: cover;
-	padding: 5rem 0;
 }
 
 .header h1{
 	text-align: center;
-	background-color: black;
-	font-size: 3rem;
+	font-size: 2rem;
+	margin: 0;
 }
 
 .main{
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-	align-items: center;
+
+	align-items: flex-start;
 	border: 2px solid red;
-	height: 300px;
+	margin: 1.5rem 1rem;
 }
 
 .item{
-	height: 3rem;
-	border: 1px solid green;
-	font-size: 1.5rem;
+	box-sizing: border-box;;
+	border: 2px solid green;
+	border-radius: 2.5rem;
+	font-size: 0.8rem;
+	width: 100%;
+	padding: 1rem;
+	margin: 1rem 0;
+	text-align: center;
+}
+
+h2{
+	text-decoration: underline;
+	margin-bottom: 1rem;
+	margin-top: 0.5rem;
+}
+
+input{
+	width: 50%;
+}
+
+form input{
+
 }
