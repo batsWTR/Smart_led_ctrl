@@ -13,26 +13,36 @@
 		</header>
 		<main class="main">
 			<div class="item">
-				<h2>Choix de la couleur:</h2>
-				<input type="color" />
+				<h2>Allumage/Extinction de la led:</h2>
+				<a href="/ledOn"><input type = "button" value="ON"> </a>
+				<a href="/ledOff"><input type="button" value="OFF"></a>
 			</div>
-			<div class="item">
-				<h2>Choix de l'intensité:</h2>
-				<input type="range" list="tickmarks" />
-				<datalist id ="tickmarks">
-					<option value="0" label="0">
-					<option value="255" label="255">
-				</datalist>
-			</div>
-			
-			<div class="item">
-				<h2>Choix de l'effet:</h2>
-			</div>
-			<div class="item">
-				<form action="/LED" method="POST">
-					<input type="submit" />
-				</form>
-			</div>
+			<form action="/LED" method="POST">
+				<div class="item">
+					<h2>Choix de la couleur:</h2>
+					<input type="color" />
+				</div>
+				<div class="item">
+					<h2>Choix de l'intensité:</h2>
+					<input type="range" list="tickmarks" />
+					<datalist id ="tickmarks">
+						<option value="0" label="0">
+						<option value="255" label="255">
+					</datalist>
+				</div>
+				
+				<div class="item">
+					<h2>Choix de l'effet:</h2>
+					<select name="effet">
+						<option value="Aucun">Aucun</option>
+						<option value="Effet_1">Effet 1</option>
+					</select>
+				</div>
+				<div class="item">
+						<input type="submit" />
+				</div>
+			</form>
+
 		</main>
 	</body>
 </html>

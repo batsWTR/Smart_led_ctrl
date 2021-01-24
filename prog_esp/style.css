@@ -10,7 +10,7 @@ body
 	margin: 0;
 	padding: 0;
 	max-width: 800px;
-	background-color:#0cb5d3;
+	background-color:#19d3da;
 	color: white;
 	box-sizing: border-box;
 	font-size: 62.5%;
@@ -24,6 +24,7 @@ body
 
 .header h1{
 	text-align: center;
+	color: #eeeeee;
 	font-size: 2rem;
 	margin: 0;
 }
@@ -32,15 +33,16 @@ body
 	display: flex;
 	flex-direction: column;
 
-	align-items: flex-start;
-	margin: 1.5rem 1rem;
+	align-items: center;
+	margin: 1rem 1rem;
 }
 
 .item{
 	box-sizing: border-box;
-	background-color: aliceblue;
-	color: #0cb5d3;
-	border: 2px solid green;
+	background-color: #eeeeee;
+	color: #373a40;
+	border: 2px solid #686d76;
+	box-shadow: -0.5rem 0.5rem 0.8rem #686868;
 	border-radius: 2.5rem;
 	font-size: 0.8rem;
 	width: 100%;

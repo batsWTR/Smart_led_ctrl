@@ -10,8 +10,8 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NB_LED, PIN, NEO_GRB + NEO_KHZ800);
 
 
 
-const char* ssid = "freebox_RXCGSQ";
-const char* pass = "baptistewentzler";
+const char* ssid = "freeboxxxxxxx";
+const char* pass = "xxxxxxxxxxxxxx";
 
 IPAddress staticIP(192,168,1,99);
 IPAddress gateway(192,168,1,1);
@@ -417,5 +417,3 @@ void convertCoul(int *rgbint, String coul){
   }
 
 }
-
-
