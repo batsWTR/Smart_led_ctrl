@@ -10,7 +10,7 @@ body
 	margin: 0;
 	padding: 0;
 	max-width: 800px;
-	background-color:rgb(72, 158, 192);
+	background-color:#0cb5d3;
 	color: white;
 	box-sizing: border-box;
 	font-size: 62.5%;
@@ -33,12 +33,13 @@ body
 	flex-direction: column;
 
 	align-items: flex-start;
-	border: 2px solid red;
 	margin: 1.5rem 1rem;
 }
 
 .item{
-	box-sizing: border-box;;
+	box-sizing: border-box;
+	background-color: aliceblue;
+	color: #0cb5d3;
 	border: 2px solid green;
 	border-radius: 2.5rem;
 	font-size: 0.8rem;
@@ -46,6 +47,14 @@ body
 	padding: 1rem;
 	margin: 1rem 0;
 	text-align: center;
+	transform-origin: top;
+	transform: scaleY(0);
+	animation: anim-menu 2.5s forwards;
+}
+
+@keyframes anim-menu{
+	from{transform: scaleY(0);}
+	to{transform: scaleY(1);}
 }
 
 h2{
