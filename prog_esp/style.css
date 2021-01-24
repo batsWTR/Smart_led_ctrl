@@ -1,6 +1,19 @@
+
+
+
+@font-face{
+	font-family: potta ;
+	src: url('PottaOne-Regular.ttf');
+}
+
+@font-face{
+	font-family: yusei;
+	src: url('YuseiMagic-Regular.ttf');
+}
+
 *
 {
-	font-family:impact,verdana,Arial;
+	font-family:yusei,verdana,Arial;
 
 
 }
@@ -23,6 +36,7 @@ body
 }
 
 .header h1{
+	font-family: potta;
 	text-align: center;
 	color: #eeeeee;
 	font-size: 2rem;
@@ -69,6 +83,6 @@ input{
 	width: 50%;
 }
 
-form input{
-
+form{
+	width: 80%;
 }
