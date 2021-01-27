@@ -1,32 +1,88 @@
+
+
+
+@font-face{
+	font-family: potta ;
+	src: url('PottaOne-Regular.ttf');
+}
+
+@font-face{
+	font-family: yusei;
+	src: url('YuseiMagic-Regular.ttf');
+}
+
 *
 {
-	font-family:impact,verdana,Arial;
+	font-family:yusei,verdana,Arial;
+
+
 }
 
 body
 {
-	background-color:rgb(4,164,215);
+	margin: auto;
+	padding: 0;
+	max-width: 800px;
+	background-color:#19d3da;
 	color: white;
-
+	box-sizing: border-box;
+	font-size: 62.5%;
 }
-footer
-{
-	background-color: rgb(244,213,4);
-	position: absolute;
-	bottom: 0;
+
+.header{
+	background-image: url("led_strip.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.header h1{
+	font-family: potta;
+	text-align: center;
+	color: #eeeeee;
+	font-size: 2rem;
+	margin: 0;
+}
+
+.main{
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+	margin: 1rem 1rem;
+}
+
+.item{
+	box-sizing: border-box;
+	background-color: #eeeeee;
+	color: #373a40;
+	border: 2px solid #686d76;
+	box-shadow: -0.5rem 0.5rem 0.8rem #686868;
+	border-radius: 2.5rem;
+	font-size: 0.8rem;
 	width: 100%;
-	height: 50px;
+	padding: 1rem;
+	margin: 1rem 0;
+	text-align: center;
+	transform-origin: top;
+	transform: scaleY(0);
+	animation: anim-menu 2.5s forwards;
+}
 
-	
+@keyframes anim-menu{
+	from{transform: scaleY(0);}
+	to{transform: scaleY(1);}
 }
-h1
-{
-	font-size:xx-large;
-	text-align: center;
-	background-image: url("/led_strip.png");
-	height: 200px;
+
+h2{
+	text-decoration: underline;
+	margin-bottom: 1rem;
+	margin-top: 0.5rem;
 }
-p,form
-{
-	text-align: center;
+
+input{
+	width: 50%;
+}
+
+form{
+	width: 80%;
 }

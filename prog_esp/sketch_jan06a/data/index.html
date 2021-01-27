@@ -3,33 +3,47 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="style.css" >
+		<meta name="viewport" content="width=device-width, scale=1.0"/>
+		<link rel="stylesheet" href="style.css" />
 		<title>RGB Controler</title>
 	</head>
 	<body>
-		<h1>Smart controler 1</h1>
-		<p>Allumage/Extinction de la led: <a href="/ledOn"><input type = "button" value="ON"> </a><a href="/ledOff"><input type="button" value="OFF"></a></p>
-		<form action="/LED" method="POST">
-			<p>Choix de la couleur: <input type="color" name ="couleur" value="#FF0000" /></p>
-			<p>Choix de l'intensité: <input type="range" min="0" max="255" name="intensite" value="128" list="tickmarks" /></p>
-			<datalist id ="tickmarks">
-				<option value="0" label="0">
-				<option value="255" label="255">
-			</datalist>
-			<p>
-				<label for="effet">Effet:</label> <br />
-				<select name="effet">
-					<option value="Aucun">Aucun</option>
-					<option value="Effet_1">Effet 1</option>
-				</select>
-			</p>
+		<header class="header">
+			<h1>LED Controler</h1>
+		</header>
+		<main class="main">
+			<div class="item">
+				<h2>Allumage/Extinction de la led:</h2>
+				<a href="/ledOn"><input type = "button" value="ON"> </a>
+				<a href="/ledOff"><input type="button" value="OFF"></a>
+			</div>
+			<form action="/LED" method="POST">
+				<div class="item">
+					<h2>Choix de la couleur:</h2>
+					<input type="color" />
+				</div>
+				<div class="item">
+					<h2>Choix de l'intensité:</h2>
+					<input type="range" list="tickmarks" min="0" max="255" />
+					<datalist id ="tickmarks">
+						<option value="0" label="0">
+						<option value="255" label="255">
+					</datalist>
+				</div>
+				
+				<div class="item">
+					<h2>Choix de l'effet:</h2>
+					<select name="effet">
+						<option value="Aucun">Aucun</option>
+						<option value="Effet_1">Effet 1</option>
+					</select>
+				</div>
+				<div class="item">
+						<input type="submit" />
+				</div>
+			</form>
 
-			<input type="submit" value= "Envoyer" />
-		</form
+		</main>
 	</body>
-	<footer>
-		<p>Bas de page<br />
-		</p>
-	</footer>
 </html>
 
