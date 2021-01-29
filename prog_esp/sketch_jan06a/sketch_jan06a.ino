@@ -10,8 +10,8 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NB_LED, PIN, NEO_GRB + NEO_KHZ800);
 
 
 
-const char* ssid = "freeboxxxxxxx";
-const char* pass = "xxxxxxxxxxxxxx";
+const char* ssid = "freebox_RXCGSQ";
+const char* pass = "baptistewentzler";
 
 IPAddress staticIP(192,168,1,99);
 IPAddress gateway(192,168,1,1);

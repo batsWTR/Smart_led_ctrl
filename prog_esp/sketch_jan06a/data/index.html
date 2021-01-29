@@ -20,11 +20,11 @@
 			<form action="/LED" method="POST">
 				<div class="item">
 					<h2>Choix de la couleur:</h2>
-					<input type="color" />
+					<input type="color" name="couleur"/>
 				</div>
 				<div class="item">
 					<h2>Choix de l'intensité:</h2>
-					<input type="range" list="tickmarks" min="0" max="255" />
+					<input type="range" list="tickmarks" name="intensite" min="0" max="255" />
 					<datalist id ="tickmarks">
 						<option value="0" label="0">
 						<option value="255" label="255">
