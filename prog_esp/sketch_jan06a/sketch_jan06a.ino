@@ -79,6 +79,7 @@ void setup() {
   server.serveStatic("/",SPIFFS,"/index.html");
   server.serveStatic("/led_strip.png",SPIFFS,"/led_strip.png");
   server.serveStatic("/style.css",SPIFFS,"/style.css");
+  server.serveStatic("/script.js",SPIFFS,"/script.js");
 
   // demarrage du serveur web
   server.on("/LED",HTTP_POST,handleled);
@@ -99,24 +100,41 @@ void loop() {
 // function calls when "Envoyer" button is clicked
 void handleled()
   {
-    Serial.print("Action sur le bouton:");
+    Serial.println("Reception de donnees:");
 
-    Serial.print("Intensité: ");
-    Serial.println(server.arg("intensite"));
-    
 
-    Serial.print("Couleur: ");
-    Serial.println(server.arg("couleur"));
+    if(server.arg("couleur") != ""){
 
-    Serial.print("Effet: ");
-    Serial.println(server.arg("effet"));
+      Serial.print("couleur: ");
+      Serial.println(server.arg("couleur"));
+      
+      couleur = server.arg("couleur");
+      setColor(server.arg("couleur"));
+      return;     
+    }
+
+    if(server.arg("intensite") != ""){
+      Serial.print("Intensité: ");
+      Serial.println(server.arg("intensite"));
+      
+      strip.setBrightness(server.arg("intensite").toInt());
+      setColor(couleur);
+      return;
+    }
+
+    if(server.arg("effet") != ""){
+      Serial.print("Effet: ");
+      Serial.println(server.arg("effet"));
+
+      return;
+    }
 
     //update of html page
-    updateContent(server.arg("couleur"), server.arg("intensite"), server.arg("effet"));
+    //updateContent(server.arg("couleur"), server.arg("intensite"), server.arg("effet"));
 
     // reload of web page when content is updated
-    server.sendHeader("Location","/");
-    server.send(303);
+    //server.sendHeader("Location","/");
+    //server.send(303);
   }
 
 // function calls when "On" button is clicked
