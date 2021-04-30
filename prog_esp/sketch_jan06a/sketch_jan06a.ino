@@ -82,9 +82,10 @@ void setup() {
   server.serveStatic("/script.js",SPIFFS,"/script.js");
 
   // demarrage du serveur web
-  server.on("/LED",HTTP_POST,handleled);
+  server.on("/LED",HTTP_GET,handleled);
   server.on("/ledOn", HTTP_GET,clickOn);
   server.on("/ledOff", HTTP_GET,clickOff);
+
   server.begin();
   Serial.println("Serveur web OK");
   Serial.println(WiFi.localIP());
@@ -96,6 +97,9 @@ void loop() {
   server.handleClient();
   
   }
+
+
+
 
 // function calls when "Envoyer" button is clicked
 void handleled()
@@ -110,6 +114,7 @@ void handleled()
       
       couleur = server.arg("couleur");
       setColor(server.arg("couleur"));
+      server.send(200);
       return;     
     }
 
@@ -119,13 +124,14 @@ void handleled()
       
       strip.setBrightness(server.arg("intensite").toInt());
       setColor(couleur);
+      server.send(200);
       return;
     }
 
     if(server.arg("effet") != ""){
       Serial.print("Effet: ");
       Serial.println(server.arg("effet"));
-
+      server.send(200);
       return;
     }
 
@@ -134,15 +140,15 @@ void handleled()
 
     // reload of web page when content is updated
     //server.sendHeader("Location","/");
-    //server.send(303);
+    server.send(200);
   }
 
 // function calls when "On" button is clicked
 void clickOn()
   {
     Serial.println("Led ON");
-    server.sendHeader("Location","/");
-    server.send(303);
+    //server.sendHeader("Location","/");
+    server.send(200, "text/plain", "on");
     // light on rgb strip with the saved color
     setColor(couleur);
 
@@ -153,8 +159,8 @@ void clickOff(){
   strip.clear();
   strip.show();
   Serial.println("Led Off");
-  server.sendHeader("Location","/");
-  server.send(303);
+  //server.sendHeader("Location","/");
+  server.send(200, "text/plain", "off");
 
 }
 
