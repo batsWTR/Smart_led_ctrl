@@ -1,19 +1,9 @@
 
 
 
-@font-face{
-	font-family: potta ;
-	src: url('PottaOne-Regular.ttf');
-}
-
-@font-face{
-	font-family: yusei;
-	src: url('YuseiMagic-Regular.ttf');
-}
-
 *
 {
-	font-family:yusei,verdana,Arial;
+	
 
 
 }
@@ -83,6 +73,3 @@ input{
 	width: 50%;
 }
 
-form{
-	width: 80%;
-}
