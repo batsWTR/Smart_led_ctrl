@@ -10,7 +10,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NB_LED, PIN, NEO_GRB + NEO_KHZ800);
 
 
 
-const char* ssid = "xxxxxx";
+const char* ssid = "xxxxxxxxx";
 const char* pass = "xxxxxxxx";
 
 IPAddress staticIP(192,168,1,99);
@@ -95,8 +95,7 @@ void setup() {
 void loop() {
  
   server.handleClient();
-  
-  }
+}
 
 
 
@@ -131,16 +130,12 @@ void handleled()
     if(server.arg("effet") != ""){
       Serial.print("Effet: ");
       Serial.println(server.arg("effet"));
+      effetFrance(NB_LED);
       server.send(200);
       return;
     }
 
-    //update of html page
-    //updateContent(server.arg("couleur"), server.arg("intensite"), server.arg("effet"));
-
-    // reload of web page when content is updated
-    //server.sendHeader("Location","/");
-    server.send(200);
+    server.send(418);
   }
 
 // function calls when "On" button is clicked
@@ -164,46 +159,25 @@ void clickOff(){
 
 }
 
-// function that update the web page with color, intensity and effect chosen
-void updateContent(String coul, String intens, String eff)
-{
+// drapeau francais
+void effetFrance(int nb_led){
+  int bleu = nb_led / 3;
+  int blanc = bleu * 2;
+  int rouge = nb_led;
 
-  String htmlText;
-
-  // update glohals vars
-  lastIntensite = intensite;
-  intensite = intens.toInt();
-  lastCouleur = couleur;
-  couleur = coul;
-  lastEffet = effet;
-  effet = eff;
-
-  // open the html file in flash
-  File f = SPIFFS.open("/index.html","r" );
-  // web page as String
-  htmlText = f.readString();
-  f.close();
-
-    // seek and replace intensity
-  String search = "value=\"" + String(lastIntensite) + "\"";
-  String replace = "value=\"" + String(intensite) + "\"";
-  htmlText.replace(search,replace);
-
-  // seek and replace color
-  search = "value=\"" + lastCouleur + "\"";
-  replace = "value=\"" + couleur + "\"";
-  htmlText.replace(search, replace);
-
-  // copy String to index file 
-  File f2 = SPIFFS.open("/index.html", "w");
-  f2.println(htmlText);
-  f2.close();
-
-  // update brightness and intensity
-  strip.setBrightness(intensite);
-  setColor(couleur);
+  for(int i = 0; i < bleu; i++){
+    strip.setPixelColor(i,0,0,255);
+  }
+  for(int i = bleu; i < blanc; i++){
+    strip.setPixelColor(i,255,255,255);
+  }
+  for(int i = blanc; i < rouge; i++){
+    strip.setPixelColor(i,255,0,0);
+  }
+  strip.show();
 
 }
+
 
 
 // define colors coul = #RRGGBB in hexa
