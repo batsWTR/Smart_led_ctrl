@@ -10,8 +10,8 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NB_LED, PIN, NEO_GRB + NEO_KHZ800);
 
 
 
-const char* ssid = "xxxxxxxxx";
-const char* pass = "xxxxxxxx";
+const char* ssid = "freebox_RXCGSQ";
+const char* pass = "baptistewentzler";
 
 IPAddress staticIP(192,168,1,99);
 IPAddress gateway(192,168,1,1);
@@ -22,17 +22,6 @@ IPAddress subnet(255,255,255,0);
 //WiFiServer server(80);
 ESP8266WebServer server(80);
 
-
-// functions
-void handleled();
-void handleintensite();
-void clickOn();
-void clickOff();
-void updateContent(String, String, String);// couleur,intensite,effet
-void setColor(String); // color in hex format #RRGGBB
-void convertCoul(int *, String); 
-
-
 // globals vars
 int intensite = 128;
 int lastIntensite = 0;
@@ -40,6 +29,16 @@ String couleur = "#FF0000";
 String lastCouleur = "";
 String effet = "Aucun";
 String lastEffet = "";
+
+// functions
+void handleled();
+void handleintensite();
+void clickOn();
+void clickOff();
+void setColor(String); // color in hex format #RRGGBB
+void convertCoul(int *, String); 
+
+
 
 void setup() {
 
@@ -85,6 +84,7 @@ void setup() {
   server.on("/LED",HTTP_GET,handleled);
   server.on("/ledOn", HTTP_GET,clickOn);
   server.on("/ledOff", HTTP_GET,clickOff);
+  server.on("/status", HTTP_GET,status);
 
   server.begin();
   Serial.println("Serveur web OK");
@@ -106,6 +106,7 @@ void handleled()
     Serial.println("Reception de donnees:");
 
 
+    // si reception couleur
     if(server.arg("couleur") != ""){
 
       Serial.print("couleur: ");
@@ -113,25 +114,42 @@ void handleled()
       
       couleur = server.arg("couleur");
       setColor(server.arg("couleur"));
-      server.send(200);
+      server.send(200, "text/plain", "on");
       return;     
     }
-
+    // si reception intensite
     if(server.arg("intensite") != ""){
       Serial.print("Intensité: ");
-      Serial.println(server.arg("intensite"));
       
-      strip.setBrightness(server.arg("intensite").toInt());
-      setColor(couleur);
-      server.send(200);
+      intensite = server.arg("intensite").toInt();
+      Serial.println(intensite);
+      strip.setBrightness(intensite);
+      strip.show();
+      if(effet == "Aucun"){
+        setColor(couleur);
+      }
+      
+
+      if(intensite == 0){
+        return server.send(200, "text/plain", "off");
+      }
+      server.send(200, "text/plain", "on");
       return;
     }
 
+    // si changement d effet
     if(server.arg("effet") != ""){
       Serial.print("Effet: ");
       Serial.println(server.arg("effet"));
-      effetFrance(NB_LED);
-      server.send(200);
+      effet = server.arg("effet");
+
+      if(effet == "France"){
+        effetFrance(NB_LED);
+        server.send(200, "text/plain", "on");
+        return;
+      }
+      
+      server.send(200, "text/plain", "on");
       return;
     }
 
@@ -158,7 +176,13 @@ void clickOff(){
   server.send(200, "text/plain", "off");
 
 }
-
+// status retourne json 
+void status(){
+  String resp = "{\"intensite\":\"";
+  resp += String(intensite) + "\",\"couleur\":\"" + couleur + "\",\"effet\":\"" + effet + "\"}";
+  Serial.println(intensite);
+  server.send(200, "text/json", resp);
+}
 // drapeau francais
 void effetFrance(int nb_led){
   int bleu = nb_led / 3;
@@ -179,6 +203,7 @@ void effetFrance(int nb_led){
 }
 
 
+//------------------------------------------------------------------------------
 
 // define colors coul = #RRGGBB in hexa
 void setColor(String coul)

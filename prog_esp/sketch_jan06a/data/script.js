@@ -1,4 +1,17 @@
 
+document.addEventListener('DOMContentLoaded', ()=>{
+    fetch("/status")
+    .then(resp => resp.json())
+    .then(resp => {
+        couleur.value = resp.couleur;
+        intensite.value = resp.value;
+        effet.value = resp.effet;
+    })
+    .catch(err => console.log(err));
+});
+
+
+
 // recuperation des elements
 
 let couleur = document.getElementById('couleur');
@@ -15,14 +28,7 @@ onBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     console.log('click on');
     fetch('/ledOn').then(resp => resp.text()).then(resp => {
-        if (resp == 'on'){
-            onBtn.style.backgroundColor = 'green';
-            offBtn.style.backgroundColor = 'initial';
-        }
-        else{
-            onBtn.style.backgroundColor = 'initial';
-            offBtn.style.backgroundColor = 'red';
-        }
+        on_off(resp)
     }).catch(err => console.log(err));
 });
 
@@ -31,14 +37,7 @@ offBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     console.log('click off');
     fetch('/ledOff').then(resp => resp.text()).then(resp => {
-        if (resp == 'off'){
-            onBtn.style.backgroundColor = 'initial';
-            offBtn.style.backgroundColor = 'red';
-        }
-        else{
-            onBtn.style.backgroundColor = 'green';
-            offBtn.style.backgroundColor = 'initial';
-        }
+        on_off(resp);
     }).catch(err => console.log(err));
 });
 
@@ -46,28 +45,23 @@ offBtn.addEventListener('click', (e)=>{
 //----------------------------------------------- COULEUR
 couleur.addEventListener('change', function(e){
     console.log(e.target.value);
-    /*
-    let demande = new XMLHttpRequest();
-    demande.open('POST', '/LED');
-    demande.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    demande.send('couleur=' + e.target.value);*/
+
     const val = e.target.value.substring(1, e.target.value.length);
     const addresse = '/LED?couleur=%23' + val;
-    fetch(addresse).then(resp => console.log('ok')).catch(err => console.log(err));
+    fetch(addresse).then(resp => resp.text()).then(resp =>{
+        on_off(resp);
+    }).catch(err => console.log(err));
 
 });
 
 //------------------------------------------------- INTENSITE
 intensite.addEventListener('change', function(e){
     console.log(e.target.value);
-    /*
-    let demande = new XMLHttpRequest();
-    demande.open('POST', '/LED');
-    demande.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    demande.send('intensite=' + e.target.value);*/
 
     fetch('/LED?intensite=' + e.target.value)
-    .then(resp => console.log('ok'))
+    .then(resp => resp.text()).then(resp =>{
+        on_off(resp);
+    })
     .catch(err => console.log(err));
 });
 
@@ -85,13 +79,25 @@ effet.addEventListener('change', function(e){
         couleur.disabled = false;
         const box = document.getElementById('box_coul').style.backgroundColor = '#eeeeee';
     }
-    /*
-    let demande = new XMLHttpRequest();
-    demande.open('POST', '/LED');
-    demande.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    demande.send('effet=' + e.target.value);*/
+
 
     fetch('/LED?effet=' + e.target.value)
-    .then(resp => console.log('ok'))
+    .then(resp => resp.text()).then(resp =>{
+        on_off(resp);
+    })
     .catch(err => console.log(err));
 });
+
+
+
+function on_off(etat){
+    if (etat == 'on'){
+        onBtn.style.backgroundColor = 'green';
+        offBtn.style.backgroundColor = 'initial';
+    }
+    else{
+        onBtn.style.backgroundColor = 'initial';
+        offBtn.style.backgroundColor = 'red';
+    }
+
+}
