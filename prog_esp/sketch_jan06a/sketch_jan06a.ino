@@ -29,6 +29,7 @@ String couleur = "#FF0000";
 String lastCouleur = "";
 String effet = "Aucun";
 String lastEffet = "";
+String state = "off";
 
 // functions
 void handleled();
@@ -111,7 +112,7 @@ void handleled()
 
       Serial.print("couleur: ");
       Serial.println(server.arg("couleur"));
-      
+      state = "on";
       couleur = server.arg("couleur");
       setColor(server.arg("couleur"));
       server.send(200, "text/plain", "on");
@@ -120,7 +121,7 @@ void handleled()
     // si reception intensite
     if(server.arg("intensite") != ""){
       Serial.print("Intensité: ");
-      
+      state = "on";
       intensite = server.arg("intensite").toInt();
       Serial.println(intensite);
       strip.setBrightness(intensite);
@@ -131,6 +132,7 @@ void handleled()
       
 
       if(intensite == 0){
+        state = "off";
         return server.send(200, "text/plain", "off");
       }
       server.send(200, "text/plain", "on");
@@ -142,7 +144,7 @@ void handleled()
       Serial.print("Effet: ");
       Serial.println(server.arg("effet"));
       effet = server.arg("effet");
-
+      state = "on";
       if(effet == "France"){
         effetFrance(NB_LED);
         server.send(200, "text/plain", "on");
@@ -160,7 +162,7 @@ void handleled()
 void clickOn()
   {
     Serial.println("Led ON");
-    //server.sendHeader("Location","/");
+    state = "on";
     server.send(200, "text/plain", "on");
     // light on rgb strip with the saved color
     setColor(couleur);
@@ -172,14 +174,14 @@ void clickOff(){
   strip.clear();
   strip.show();
   Serial.println("Led Off");
-  //server.sendHeader("Location","/");
+  state = "off";
   server.send(200, "text/plain", "off");
 
 }
 // status retourne json 
 void status(){
   String resp = "{\"intensite\":\"";
-  resp += String(intensite) + "\",\"couleur\":\"" + couleur + "\",\"effet\":\"" + effet + "\"}";
+  resp += String(intensite) + "\",\"couleur\":\"" + couleur + "\",\"effet\":\"" + effet + "\",\"state\":\"" + state + "\"}";
   Serial.println(intensite);
   server.send(200, "text/json", resp);
 }

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         couleur.value = resp.couleur;
         intensite.value = resp.value;
         effet.value = resp.effet;
-        on_off('off');
+        on_off(resp.state);
     })
     .catch(err => console.log(err));
 });
@@ -93,12 +93,12 @@ effet.addEventListener('change', function(e){
 
 function on_off(etat){
     if (etat == 'on'){
-        onBtn.style.backgroundColor = 'green';
+        onBtn.style.backgroundColor = '#90ee90';
         offBtn.style.backgroundColor = 'initial';
     }
     else{
         onBtn.style.backgroundColor = 'initial';
-        offBtn.style.backgroundColor = 'red';
+        offBtn.style.backgroundColor = '#ffcccb';
     }
 
 }
