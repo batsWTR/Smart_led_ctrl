@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         couleur.value = resp.couleur;
         intensite.value = resp.value;
         effet.value = resp.effet;
+        on_off('off');
     })
     .catch(err => console.log(err));
 });
